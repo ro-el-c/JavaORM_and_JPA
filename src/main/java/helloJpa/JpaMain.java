@@ -21,10 +21,14 @@ public class JpaMain {
 //            em.persist(member);
 
             // 회원 수정
+//            Member findMember = em.find(Member.class, 1L);
+//            System.out.println("findMember.getId() = " + findMember.getId());
+//            System.out.println("findMember.getName() = " + findMember.getName());
+//            findMember.setName("helloB");
+
+            // 회원 삭제
             Member findMember = em.find(Member.class, 1L);
-            System.out.println("findMember.getId() = " + findMember.getId());
-            System.out.println("findMember.getName() = " + findMember.getName());
-            findMember.setName("helloB");
+            em.remove(findMember);
 
             tx.commit();
         } catch (Exception e) {
