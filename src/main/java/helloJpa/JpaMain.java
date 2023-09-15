@@ -15,10 +15,16 @@ public class JpaMain {
 
         try {
             // 회원 저장
-            Member member = new Member();
-            member.setId(1L);
-            member.setName("HelloA");
-            em.persist(member);
+//            Member member = new Member();
+//            member.setId(1L);
+//            member.setName("HelloA");
+//            em.persist(member);
+
+            // 회원 수정
+            Member findMember = em.find(Member.class, 1L);
+            System.out.println("findMember.getId() = " + findMember.getId());
+            System.out.println("findMember.getName() = " + findMember.getName());
+            findMember.setName("helloB");
 
             tx.commit();
         } catch (Exception e) {
@@ -28,7 +34,5 @@ public class JpaMain {
         }
 
         emf.close();
-
-        System.out.println("Hello, JPA!");
     }
 }
