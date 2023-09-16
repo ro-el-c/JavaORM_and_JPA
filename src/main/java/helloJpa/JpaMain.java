@@ -21,13 +21,21 @@ public class JpaMain {
             member.setId(1L);
             member.setName("HelloA");
             // 영속
-            em.persist(member);
+            em.persist(member); // 1차 캐시에 저장
 
             // 회원 수정
-            Member findMember = em.find(Member.class, 1L); // 회원 조회
+            // 회원 조회 - select Query X
+            // -> 1차 캐시에서 조회
+            Member findMember = em.find(Member.class, 1L);
             System.out.println("findMember.getId() = " + findMember.getId());
             System.out.println("findMember.getName() = " + findMember.getName());
             findMember.setName("helloB");
+
+            // 회원 조회 - select Query O
+            // -> 1차 캐시에 없음
+            // -> DB 에서 조회
+            Member member2 = em.find(Member.class, 2L);
+            System.out.println("member2.getName() = " + member2.getName());
 
             // 회원 삭제
 //            Member findMember = em.find(Member.class, 1L);
