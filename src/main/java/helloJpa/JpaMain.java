@@ -52,9 +52,15 @@ public class JpaMain {
             }
 
             // 변경 감지
-            Member member150 = em.find(Member.class, 150L);
-            member150.setName("150NameChange");
+            Member member150 = em.find(Member.class, 150L); // DB 에서 조회 -> 영속 상태로 등록
+            member150.setName("150Name");
             // 실행 후 DB 확인 -> 변경 감지 및 반영
+
+            // 준영속 상태
+            em.detach(member150);
+            // 영속 상태였던 member150 을 준영속 상태로 만듦
+            // 더 이상 JPA 가 관리하지 않음
+            // 트랜잭션 커밋할 때 아무 일도 일어나지 않음
 
             // 트랜잭션 - 쓰기 지연
             tx.commit();
