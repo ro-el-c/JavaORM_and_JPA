@@ -51,6 +51,11 @@ public class JpaMain {
                 System.out.println("m.getName() = " + m.getName());
             }
 
+            // 변경 감지
+            Member member150 = em.find(Member.class, 150L);
+            member150.setName("150NameChange");
+            // 실행 후 DB 확인 -> 변경 감지 및 반영
+
             // 트랜잭션 - 쓰기 지연
             tx.commit();
         } catch (Exception e) {
