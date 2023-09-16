@@ -16,9 +16,11 @@ public class JpaMain {
 
         try {
             // 회원 저장
+            // 비영속
             Member member = new Member();
             member.setId(1L);
             member.setName("HelloA");
+            // 영속
             em.persist(member);
 
             // 회원 수정
