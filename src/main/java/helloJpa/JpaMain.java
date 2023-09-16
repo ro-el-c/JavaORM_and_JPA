@@ -51,6 +51,7 @@ public class JpaMain {
                 System.out.println("m.getName() = " + m.getName());
             }
 
+            // 트랜잭션 - 쓰기 지연
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
