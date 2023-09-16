@@ -37,6 +37,10 @@ public class JpaMain {
             Member member2 = em.find(Member.class, 2L);
             System.out.println("member2.getName() = " + member2.getName());
 
+            // 영속 엔티티의 동일성 보장
+            Member member22 = em.find(Member.class, 2L);
+            System.out.println("result = " + (member2 == member22));
+
             // 회원 삭제
 //            Member findMember = em.find(Member.class, 1L);
             em.remove(findMember);
