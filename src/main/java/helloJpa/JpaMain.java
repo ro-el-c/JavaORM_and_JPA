@@ -18,10 +18,17 @@ public class JpaMain {
             // 회원 저장
             // 비영속
             Member member = new Member();
-            member.setId(1L);
+            //member.setId(1L);
             member.setName("HelloA");
             // 영속
             em.persist(member); // 1차 캐시에 저장
+
+            Member newMember = new Member();
+            newMember.setName("new2");
+            Member newMember2 = new Member();
+            newMember2.setName("new3");
+            em.persist(newMember);
+            em.persist(newMember2);
 
             // 회원 수정
             // 회원 조회 - select Query X
@@ -65,6 +72,7 @@ public class JpaMain {
             // 트랜잭션 - 쓰기 지연
             tx.commit();
         } catch (Exception e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
             tx.rollback();
         } finally {
             em.close();
