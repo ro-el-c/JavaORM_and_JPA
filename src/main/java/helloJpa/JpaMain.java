@@ -30,6 +30,10 @@ public class JpaMain {
             em.persist(newMember);
             em.persist(newMember2);
 
+            System.out.println("member = " + member.getId());
+            System.out.println("newMember = " + newMember.getId());
+            System.out.println("newMember2 = " + newMember2.getId());
+
             // 회원 수정
             // 회원 조회 - select Query X
             // -> 1차 캐시에서 조회
