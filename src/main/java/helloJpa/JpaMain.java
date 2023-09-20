@@ -1,3 +1,4 @@
+/*
 package helloJpa;
 
 import javax.persistence.EntityManager;
@@ -85,3 +86,4 @@ public class JpaMain {
         emf.close();
     }
 }
+*/
