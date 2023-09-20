@@ -22,6 +22,9 @@ public class ShopMain {
 
             Member member = em.find(Member.class, memberId);
 
+            // 객체 지향적 코드
+            Member findMember = order.getMember();
+
             tx.commit();
         } catch (Exception e) {
             System.out.println("e.getMessage() = " + e.getMessage());
