@@ -1,5 +1,8 @@
 package jpashop;
 
+import jpashop.domain.Member;
+import jpashop.domain.Order;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -13,6 +16,12 @@ public class ShopMain {
         tx.begin();
         
         try {
+            // 객체지향과 거리가 먼 코드
+            Order order = em.find(Order.class, 1L);
+            Long memberId = order.getMemberId();
+
+            Member member = em.find(Member.class, memberId);
+
             tx.commit();
         } catch (Exception e) {
             System.out.println("e.getMessage() = " + e.getMessage());
