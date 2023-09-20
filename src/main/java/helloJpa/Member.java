@@ -1,3 +1,4 @@
+/*
 package helloJpa;
 
 import javax.persistence.*;
@@ -50,3 +51,4 @@ public class Member {
         this.userName = name;
     }
 }
+*/
