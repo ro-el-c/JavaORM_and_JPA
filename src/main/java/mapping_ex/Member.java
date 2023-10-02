@@ -15,6 +15,10 @@ public class Member {
 //    @Column(name = "team_id")
 //    private Long teamId;
 
+    /**
+     * Member 의 Team 이 연관관계의 주인
+     * -> Team 의 id 값을 외래키로 가지기 때문
+     * */
     @ManyToOne // Member : Team = N : 1
     @JoinColumn(name = "team_id") // 외래키 매핑
     private Team team;

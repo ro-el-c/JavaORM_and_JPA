@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class MappingMain {
     public static void main(String[] args) {
@@ -29,11 +30,18 @@ public class MappingMain {
             em.persist(teamB);
             member.setTeam(teamB);
 
+            em.flush(); em.clear(); // DB 반영
+
             Member findMember = em.find(Member.class, member.getId()); // 1차 캐시에서 가져옴
             Team findTeam = findMember.getTeam();
             System.out.println("findTeam.getName() = " + findTeam.getName());
             /*Long findTeamId = findMember.getTeamId();
             Team findTeam = em.find(Team.class, findTeamId); // 객체지향적이지 못한 코드*/
+
+            List<Member> members = findTeam.getMembers(); // flush 를 통해 DB 에 반영을 해야지 가져올 수 있음
+            for (Member m : members) {
+                System.out.println("m = " + m.getName());
+            }
 
             tx.commit();
         } catch (Exception e) {
