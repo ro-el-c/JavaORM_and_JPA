@@ -2,24 +2,28 @@ package jpashop.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-//@Entity
+@Entity
 @Table(name = "orders")
 public class Order {
     @Id @GeneratedValue
     @Column(name = "order_id")
     private Long id;
 
-    @Column(name = "member_id")
-    private Long memberId;
-    /**
-     * !! 문제 !!
+//    @Column(name = "member_id")
+//    private Long memberId;
+    /*
+     * !! 위 코드의 문제 !!
      * 관계형 DB 에 객체를 맞춘 설계
      * 객체 그래프 탐색 불가능
      * 참조가 없음
      * */
 
     // 객체 지향적 코드
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
     private LocalDateTime orderDate;
@@ -27,12 +31,12 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    public Member getMember() {
-        return member;
-    }
+    @OneToMany(mappedBy = "order") // 양방향 연관 관계
+    private List<OrderItem> orderItems = new ArrayList<>();
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void addOrderItem(OrderItem orderItem) {
+        orderItem.setOrder(this);
+        orderItems.add(orderItem);
     }
 
     public Long getId() {
@@ -43,12 +47,12 @@ public class Order {
         this.id = id;
     }
 
-    public Long getMemberId() {
-        return memberId;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public LocalDateTime getOrderDate() {

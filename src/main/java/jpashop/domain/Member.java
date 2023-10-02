@@ -1,11 +1,11 @@
 package jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-//@Entity
+@Entity
+@Table(name = "member")
 public class Member {
     @Id @GeneratedValue // strategy: AUTO
     @Column(name = "member_id")
@@ -14,6 +14,14 @@ public class Member {
     private String city;
     private String street;
     private String zipcode;
+
+    @OneToMany(mappedBy = "member") // 양방향 연관 관계
+    private List<Order> orders = new ArrayList<>();
+
+    public void addOrder(Order order) {
+        order.setMember(this);
+        orders.add(order);
+    }
 
     public Long getId() {
         return id;

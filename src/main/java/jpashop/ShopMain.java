@@ -2,6 +2,7 @@ package jpashop;
 
 import jpashop.domain.Member;
 import jpashop.domain.Order;
+import jpashop.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,14 +17,23 @@ public class ShopMain {
         tx.begin();
         
         try {
-            // 객체지향과 거리가 먼 코드
+            /*// 객체지향과 거리가 먼 코드
             Order order = em.find(Order.class, 1L);
             Long memberId = order.getMemberId();
 
             Member member = em.find(Member.class, memberId);
 
             // 객체 지향적 코드
-            Member findMember = order.getMember();
+            Order order = em.find(Order.class, 1L);
+            Member findMember = order.getMember();*/
+
+            Order order = new Order();
+            em.persist(order);
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+
+            em.persist(orderItem);
 
             tx.commit();
         } catch (Exception e) {

@@ -1,11 +1,9 @@
 package jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-//@Entity
+@Entity
+@Table(name = "item")
 public class Item {
     @Id @GeneratedValue
     @Column(name = "item_id")
