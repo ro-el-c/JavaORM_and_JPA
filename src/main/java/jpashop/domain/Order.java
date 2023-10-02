@@ -3,7 +3,7 @@ package jpashop.domain;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+//@Entity
 @Table(name = "orders")
 public class Order {
     @Id @GeneratedValue
