@@ -1,11 +1,11 @@
-/*
 package helloJpa;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Entity
+//@Entity
+
 //@SequenceGenerator(
 //        name = "MEMBER_SEQ_GENERATOR",
 //        sequenceName = "MEMBER_SEQ", // 매핑할 데이터베이스 시퀀스 이름
@@ -51,4 +51,3 @@ public class Member {
         this.userName = name;
     }
 }
-*/
