@@ -2,7 +2,7 @@ package mapping_ex;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Member {
     @Id
     @GeneratedValue
