@@ -16,6 +16,12 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private List<Member> members = new ArrayList<>();
 
+    /* 일대다 연관 관계
+    @OneToMany
+    @JoinColumn(name = "team_id")
+    private List<Member> members = new ArrayList<>();
+    * */
+
     //== 연관 관계 편의 메서드 2 ==// -> 한쪽만 두기
     /*public void addMember(Member member) {
         member.setTeam(this);
