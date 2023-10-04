@@ -23,6 +23,10 @@ public class Member {
     @JoinColumn(name = "team_id") // 외래키 매핑
     private Team team;
 
+    @OneToOne
+    @JoinColumn(name = "locker_id")
+    private Locker locker;
+
     public Long getId() {
         return id;
     }
