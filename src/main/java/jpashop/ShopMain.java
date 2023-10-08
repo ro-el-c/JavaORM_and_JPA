@@ -1,6 +1,7 @@
 package jpashop;
 
 import jpashop.domain.Member;
+import jpashop.domain.Movie;
 import jpashop.domain.Order;
 import jpashop.domain.OrderItem;
 
@@ -27,13 +28,29 @@ public class ShopMain {
             Order order = em.find(Order.class, 1L);
             Member findMember = order.getMember();*/
 
-            Order order = new Order();
+            /*Order order = new Order();
             em.persist(order);
 
             OrderItem orderItem = new OrderItem();
             orderItem.setOrder(order);
 
-            em.persist(orderItem);
+            em.persist(orderItem);*/
+
+            Movie movie = new Movie();
+            movie.setDirector("directorA");
+            movie.setActor("actorA");
+            movie.setName("Inception");
+            movie.setPrice(20000);
+            // item, movie 테이블에 insert
+            // 두 칼럼은 동일한 id 를 가지며, movie 테이블이 외래키를 가짐
+
+            em.persist(movie);
+
+            em.flush();
+            em.clear();
+
+            Movie findMovie = em.find(Movie.class, movie.getId()); // join
+            System.out.println("findMovie = " + findMovie);
 
             tx.commit();
         } catch (Exception e) {
