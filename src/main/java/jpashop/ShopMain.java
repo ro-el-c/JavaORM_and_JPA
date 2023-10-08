@@ -1,9 +1,6 @@
 package jpashop;
 
-import jpashop.domain.Member;
-import jpashop.domain.Movie;
-import jpashop.domain.Order;
-import jpashop.domain.OrderItem;
+import jpashop.domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,7 +26,8 @@ public class ShopMain {
             Order order = em.find(Order.class, 1L);
             Member findMember = order.getMember();*/
 
-            /*Order order = new Order();
+            /* 객체지향 모델링
+            Order order = new Order();
             em.persist(order);
 
             OrderItem orderItem = new OrderItem();
@@ -37,8 +35,7 @@ public class ShopMain {
 
             em.persist(orderItem);*/
 
-            /*
-            상속관계 매핑
+            /* 상속관계 매핑
             Movie movie = new Movie();
             movie.setDirector("directorA");
             movie.setActor("actorA");
@@ -55,6 +52,7 @@ public class ShopMain {
             Movie findMovie = em.find(Movie.class, movie.getId()); // join
             System.out.println("findMovie = " + findMovie);*/
 
+            /* @MappedSuperclass
             Member member = new Member();
             member.setName("Kim");
             member.setCreatedBy("Lee");
@@ -63,7 +61,13 @@ public class ShopMain {
             em.persist(member);
 
             em.flush();
-            em.clear();
+            em.clear();*/
+
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영한");
+
+            em.persist(book);
 
             tx.commit();
         } catch (Exception e) {
