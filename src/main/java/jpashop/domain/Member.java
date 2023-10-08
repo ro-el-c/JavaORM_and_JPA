@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "member")
-public class Member {
+public class Member extends BaseEntity {
     @Id @GeneratedValue // strategy: AUTO
     @Column(name = "member_id")
     private Long id;

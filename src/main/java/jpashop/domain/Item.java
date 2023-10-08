@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "item")
 @Inheritance(strategy = InheritanceType.JOINED) // 상속 관계 매핑 - 조인 전략
 @DiscriminatorColumn // DTYPE 칼럼 ((있는 것이 좋음))
-public class Item {
+public class Item extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "item_id")
     private Long id;
