@@ -21,14 +21,15 @@ public class CascadeMain {
             parent.addChild(child2);
 
             em.persist(parent);
-//            em.persist(child1);
-//            em.persist(child2);
+            em.persist(child1);
+            em.persist(child2);
 
             em.flush();
             em.clear();
 
             Parent findParent = em.find(Parent.class, parent.getId());
-            findParent.getChildList().remove(0);
+            em.remove(findParent);
+//            findParent.getChildList().remove(0);
 
             tx.commit();
         } catch (Exception e) {
