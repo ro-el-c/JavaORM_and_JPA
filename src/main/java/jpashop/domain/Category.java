@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 @Table(name = "category")
 public class Category extends BaseEntity {
@@ -11,11 +13,11 @@ public class Category extends BaseEntity {
     private Long id;
 
     private String name;
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent") // FetchType fetch() default FetchType.LAZY;
     private List<Category> childs = new ArrayList<>();
 
     @ManyToMany

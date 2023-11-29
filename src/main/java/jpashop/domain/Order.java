@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity {
@@ -22,11 +24,11 @@ public class Order extends BaseEntity {
      * */
 
     // 객체 지향적 코드
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 

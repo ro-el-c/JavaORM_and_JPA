@@ -2,6 +2,8 @@ package jpashop.domain;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 @Table(name = "delivery")
 public class Delivery extends BaseEntity {
@@ -14,6 +16,6 @@ public class Delivery extends BaseEntity {
 
     private DeliveryStatus status;
 
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = LAZY)
     private Order order; // 일대일 양방향
 }
