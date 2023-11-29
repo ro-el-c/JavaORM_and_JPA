@@ -2,7 +2,7 @@ package cascade_ex;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Child {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
