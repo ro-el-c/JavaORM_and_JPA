@@ -1,12 +1,14 @@
 package jpashop;
 
-import jpashop.domain.*;
+import jpashop.domain.item.Book;
+import jpashop.domain.member.Address;
+import jpashop.domain.member.Member;
+import jpashop.domain.member.Period;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.time.LocalDateTime;
 
 public class ShopMain {
     public static void main(String[] args) {
@@ -63,11 +65,17 @@ public class ShopMain {
             em.flush();
             em.clear();*/
 
-            Book book = new Book();
+            /*Book book = new Book();
             book.setName("JPA");
             book.setAuthor("김영한");
 
-            em.persist(book);
+            em.persist(book);*/
+
+            // 값 타입
+            Member member = new Member();
+            member.setName("값 타입");
+            member.setAddress(new Address("city", "street", "zipcode"));
+            member.setWorkPeriod(new Period());
 
             tx.commit();
         } catch (Exception e) {

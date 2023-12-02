@@ -1,4 +1,7 @@
-package jpashop.domain;
+package jpashop.domain.order;
+
+import jpashop.domain.BaseEntity;
+import jpashop.domain.item.Item;
 
 import javax.persistence.*;
 

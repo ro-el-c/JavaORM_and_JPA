@@ -1,4 +1,6 @@
-package jpashop.domain;
+package jpashop.domain.item;
+
+import jpashop.domain.item.Item;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -7,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "album")
 @DiscriminatorValue("album")
-public class Album extends Item{
+public class Album extends Item {
     private String artist;
     private String etc;
 

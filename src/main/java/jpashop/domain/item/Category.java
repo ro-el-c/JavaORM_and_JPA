@@ -1,4 +1,6 @@
-package jpashop.domain;
+package jpashop.domain.item;
+
+import jpashop.domain.BaseEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;

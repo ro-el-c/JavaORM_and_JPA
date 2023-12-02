@@ -1,4 +1,6 @@
-package jpashop.domain;
+package jpashop.domain.item;
+
+import jpashop.domain.item.Item;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

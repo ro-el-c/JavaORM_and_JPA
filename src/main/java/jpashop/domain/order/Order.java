@@ -1,4 +1,8 @@
-package jpashop.domain;
+package jpashop.domain.order;
+
+import jpashop.domain.BaseEntity;
+import jpashop.domain.delivery.Delivery;
+import jpashop.domain.member.Member;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
