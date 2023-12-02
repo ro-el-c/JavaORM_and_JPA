@@ -2,7 +2,7 @@ package value_object_ex;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class AddressEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_entity_id")
