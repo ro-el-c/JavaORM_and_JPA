@@ -69,6 +69,10 @@ public class ValueMain {
                 System.out.println("food = " + food);
             }
 
+            // 김치찌개 제거, 한식 추가
+            findMember.getFavoriteFoods().remove("김치찌개");
+            findMember.getFavoriteFoods().add("한식");
+
             tx.commit();
         } catch (Exception e) {
             System.out.println("e.getMessage() = " + e.getMessage());
