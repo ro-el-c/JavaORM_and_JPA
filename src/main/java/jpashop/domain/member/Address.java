@@ -21,23 +21,17 @@ public class Address {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getStreet() {
         return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
     }
 
     public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
+    /**
+     * 값 타입은 불변 객체로 만들어 부작용을 막을 수 있다.
+     * 생성자를 통해서만 값을 설정하거나, 내부에서만 사용(private)할 수 있도록 한다.
+     * -> 수정자(setter)를 생성하지 않는다.
+     * */
 }
