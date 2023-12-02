@@ -56,22 +56,26 @@ public class ValueMain {
             System.out.println("=============== START ===============");
             Member findMember = em.find(Member.class, member.getId());
 
-            System.out.println("findMember.getAddressHistory().getClass() = " + findMember.getAddressHistory().getClass());
-            System.out.println("findMember.getFavoriteFoods().getClass() = " + findMember.getFavoriteFoods().getClass());
+//            System.out.println("findMember.getAddressHistory().getClass() = " + findMember.getAddressHistory().getClass());
+//            System.out.println("findMember.getFavoriteFoods().getClass() = " + findMember.getFavoriteFoods().getClass());
 
-            List<Address> addressHistory = findMember.getAddressHistory();
-            for (Address address : addressHistory) {
-                System.out.println("address = " + address.getCity());
-            }
-
-            Set<String> favoriteFoods = findMember.getFavoriteFoods();
-            for (String food : favoriteFoods) {
-                System.out.println("food = " + food);
-            }
+//            List<Address> addressHistory = findMember.getAddressHistory();
+//            for (Address address : addressHistory) {
+//                System.out.println("address = " + address.getCity());
+//            }
+//
+//            Set<String> favoriteFoods = findMember.getFavoriteFoods();
+//            for (String food : favoriteFoods) {
+//                System.out.println("food = " + food);
+//            }
 
             // 김치찌개 제거, 한식 추가
-            findMember.getFavoriteFoods().remove("김치찌개");
-            findMember.getFavoriteFoods().add("한식");
+//            findMember.getFavoriteFoods().remove("김치찌개");
+//            findMember.getFavoriteFoods().add("한식");
+
+            // 주소 컬렉션 값 변경
+            findMember.getAddressHistory().remove(new Address("workCity", "street2", "2000"));
+            findMember.getAddressHistory().add(new Address("newWorkCity", "street7", "7000"));
 
             tx.commit();
         } catch (Exception e) {
