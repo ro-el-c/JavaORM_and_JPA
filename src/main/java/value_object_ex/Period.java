@@ -1,4 +1,4 @@
-package jpashop.domain.member;
+package value_object_ex;
 
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
