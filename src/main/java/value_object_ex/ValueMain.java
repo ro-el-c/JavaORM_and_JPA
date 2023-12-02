@@ -45,8 +45,8 @@ public class ValueMain {
             member.getFavoriteFoods().add("팟타이");
             member.getFavoriteFoods().add("파스타");
 
-            member.getAddressHistory().add(new Address("workCity", "street2", "2000"));
-            member.getAddressHistory().add(new Address("workCity2", "street5", "3000"));
+            member.getAddressHistory().add(new AddressEntity("workCity", "street2", "2000"));
+            member.getAddressHistory().add(new AddressEntity("workCity2", "street5", "3000"));
 
             em.persist(member);
 
@@ -74,8 +74,8 @@ public class ValueMain {
 //            findMember.getFavoriteFoods().add("한식");
 
             // 주소 컬렉션 값 변경
-            findMember.getAddressHistory().remove(new Address("workCity", "street2", "2000"));
-            findMember.getAddressHistory().add(new Address("newWorkCity", "street7", "7000"));
+//            findMember.getAddressHistory().remove(new Address("workCity", "street2", "2000"));
+//            findMember.getAddressHistory().add(new Address("newWorkCity", "street7", "7000"));
 
             tx.commit();
         } catch (Exception e) {

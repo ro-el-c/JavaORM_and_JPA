@@ -1,12 +1,12 @@
 package value_object_ex;
 
-import jpashop.domain.BaseEntity;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static javax.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "member")
@@ -38,10 +38,13 @@ public class Member/* extends BaseEntity */{
     @Column(name = "food_name") // 값이 하나이기 때문에 예외적으로 칼럼 명 지정 가능
     private Set<String> favoriteFoods = new HashSet<>();
 
-    @ElementCollection
-    @CollectionTable(name = "address",
-            joinColumns = @JoinColumn(name = "member_id"))
-    private List<Address> addressHistory = new ArrayList<>();
+//    @ElementCollection
+//    @CollectionTable(name = "address",
+//            joinColumns = @JoinColumn(name = "member_id"))
+//    private List<Address> addressHistory = new ArrayList<>();
+    @OneToMany(cascade = ALL, orphanRemoval = true)
+    @JoinColumn(name = "member_id")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -79,8 +82,23 @@ public class Member/* extends BaseEntity */{
         return favoriteFoods;
     }
 
-    public List<Address> getAddressHistory() {
+    public void setFavoriteFoods(Set<String> favoriteFoods) {
+        this.favoriteFoods = favoriteFoods;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
+
+    public List<AddressEntity> getAddressHistory() {
         return addressHistory;
     }
 
+    public void setAddressHistory(List<AddressEntity> addressHistory) {
+        this.addressHistory = addressHistory;
+    }
 }
