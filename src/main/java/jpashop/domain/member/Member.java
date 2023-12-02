@@ -23,6 +23,13 @@ public class Member extends BaseEntity {
     // 주소
     @Embedded
     private Address address;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "city", column = @Column(name = "work_city")),
+            @AttributeOverride(name = "street", column = @Column(name = "work_street")),
+            @AttributeOverride(name = "zipcode", column = @Column(name = "work_zipcode"))
+    })
+    private Address workAddress;
 
     @OneToMany(mappedBy = "member") // 양방향 연관 관계
     private List<Order> orders = new ArrayList<>();
