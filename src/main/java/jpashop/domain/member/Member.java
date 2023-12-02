@@ -4,7 +4,6 @@ import jpashop.domain.BaseEntity;
 import jpashop.domain.order.Order;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,21 +14,9 @@ public class Member extends BaseEntity {
     @Column(name = "member_id")
     private Long id;
     private String name;
-
-    // 근무 기간
-    @Embedded
-    private Period workPeriod;
-
-    // 주소
-    @Embedded
-    private Address address;
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "city", column = @Column(name = "work_city")),
-            @AttributeOverride(name = "street", column = @Column(name = "work_street")),
-            @AttributeOverride(name = "zipcode", column = @Column(name = "work_zipcode"))
-    })
-    private Address workAddress;
+    private String city;
+    private String street;
+    private String zipcode;
 
     @OneToMany(mappedBy = "member") // 양방향 연관 관계
     private List<Order> orders = new ArrayList<>();
@@ -55,19 +42,35 @@ public class Member extends BaseEntity {
         this.name = name;
     }
 
-    public Period getWorkPeriodPeriod() {
-        return workPeriod;
+    public String getCity() {
+        return city;
     }
 
-    public void setWorkPeriod(Period period) {
-        this.workPeriod = period;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getStreet() {
+        return street;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

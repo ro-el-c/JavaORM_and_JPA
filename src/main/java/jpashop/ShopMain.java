@@ -1,10 +1,5 @@
 package jpashop;
 
-import jpashop.domain.item.Book;
-import jpashop.domain.member.Address;
-import jpashop.domain.member.Member;
-import jpashop.domain.member.Period;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -71,27 +66,6 @@ public class ShopMain {
 
             em.persist(book);*/
 
-            // 값 타입
-            /*Member member = new Member();
-            member.setName("값 타입");
-            member.setAddress(new Address("city", "street", "zipcode"));
-            member.setWorkPeriod(new Period());*/
-
-            Address address = new Address("city", "street", "10000");
-
-            Member member = new Member();
-            member.setName("member1");
-            member.setAddress(address);
-            em.persist(member);
-
-            Address copyAddress = new Address(address.getCity(), address.getStreet(), address.getZipcode());
-
-            Member member2 = new Member();
-            member2.setName("member2");
-            member2.setAddress(address);
-            em.persist(member2);
-
-            member.getAddress().setCity("newCity");
 
             tx.commit();
         } catch (Exception e) {
