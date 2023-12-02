@@ -72,10 +72,26 @@ public class ShopMain {
             em.persist(book);*/
 
             // 값 타입
-            Member member = new Member();
+            /*Member member = new Member();
             member.setName("값 타입");
             member.setAddress(new Address("city", "street", "zipcode"));
-            member.setWorkPeriod(new Period());
+            member.setWorkPeriod(new Period());*/
+
+            Address address = new Address("city", "street", "10000");
+
+            Member member = new Member();
+            member.setName("member1");
+            member.setAddress(address);
+            em.persist(member);
+
+            Address copyAddress = new Address(address.getCity(), address.getStreet(), address.getZipcode());
+
+            Member member2 = new Member();
+            member2.setName("member2");
+            member2.setAddress(address);
+            em.persist(member2);
+
+            member.getAddress().setCity("newCity");
 
             tx.commit();
         } catch (Exception e) {
