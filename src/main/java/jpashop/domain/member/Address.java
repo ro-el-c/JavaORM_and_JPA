@@ -1,6 +1,7 @@
 package jpashop.domain.member;
 
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 @Embeddable
 public class Address {
@@ -34,4 +35,17 @@ public class Address {
      * 생성자를 통해서만 값을 설정하거나, 내부에서만 사용(private)할 수 있도록 한다.
      * -> 수정자(setter)를 생성하지 않는다.
      * */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(zipcode, address.zipcode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(city, street, zipcode);
+    }
 }
