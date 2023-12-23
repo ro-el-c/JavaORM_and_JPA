@@ -24,7 +24,12 @@ public class JPQLMain {
                 em.persist(team);
 
                 Member member = new Member();
-                member.setName("member" + i);
+                if (i == 2) {
+                    member.setName("관리자");
+                }
+                if (i > 2) {
+                    member.setName("member" + i);
+                }
                 member.setAge(i*5);
 
                 member.setTeam(team);
@@ -87,6 +92,18 @@ public class JPQLMain {
                     "where m.team = ANY(select t from Team t)";
             */
 
+            //조건식 - coalesce
+            //ex. m.name이 null 이면 '이름 없는 회원' 반환, null이 아니면 m.name 반환
+            List<String> coalesceResult = em.createQuery("select coalesce(m.name, '이름 없는 회원') from Member m", String.class)
+                    .getResultList();
+            System.out.println("coalesceResult = " + coalesceResult.get(0));
+
+            //조건식 - nullif
+            //ex. 사용자 이름이 ‘관리자’면 null을 반환, 나머지는 본인 이름 반환
+            List<String> nullifResult = em.createQuery("select nullif(m.name, '관리자') from Member m", String.class)
+                    .getResultList();
+            System.out.println("nullifResult 이름이 관리자인 경우 = " + nullifResult.get(1));
+            System.out.println("nullifResult 이름이 관리자가 아닌 경우 = " + nullifResult.get(2));
 
             tx.commit();
         } catch (Exception e) {
