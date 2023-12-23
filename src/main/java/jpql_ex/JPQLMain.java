@@ -17,10 +17,12 @@ public class JPQLMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setName("member1");
-            member.setAge(10);
-            em.persist(member);
+            for (int i = 1; i <= 10; i++) {
+                Member member = new Member();
+                member.setName("member" + i);
+                member.setAge(i*5);
+                em.persist(member);
+            }
 
             em.flush();
             em.clear();
@@ -40,7 +42,6 @@ public class JPQLMain {
             Object[] result = resultList.get(0);
             System.out.println("username = " + result[0]);
             System.out.println("age = " + result[1]);
-            */
 
             //new DTO
             List<MemberDTO> resultList = em.createQuery("select new jpql_ex.dto.MemberDTO(m.name, m.age) from Member m", MemberDTO.class)
@@ -49,6 +50,18 @@ public class JPQLMain {
             MemberDTO memberDTO = resultList.get(0);
             System.out.println("username = " + memberDTO.getName());
             System.out.println("age = " + memberDTO.getAge());
+            */
+
+            //페이징
+            List<Member> result = em.createQuery("select m from Member m order by m.age desc ", Member.class)
+                    .setFirstResult(0)
+                    .setMaxResults(10)
+                    .getResultList();
+
+            System.out.println("result.size = " + result.size());
+            for (Member member1 : result) {
+                System.out.println("member1 = " + member1);
+            }
 
             tx.commit();
         } catch (Exception e) {
