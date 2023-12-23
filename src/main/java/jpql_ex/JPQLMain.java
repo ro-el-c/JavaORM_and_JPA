@@ -74,18 +74,19 @@ public class JPQLMain {
             String query = "select m from Member m left join m.team t on t.name='team3'";
             List<Member> result = em.createQuery(query, Member.class).getResultList();
             System.out.println("result size = " + result.size());
-            */
 
             //서브 쿼리 ex
             //teamA 소속인 회원
             String subQuery1 = "select m from Member m" +
-                    "where exists (select t from m.team t where t.name='teamA'";
+                    "where exists (select t from m.team t where t.name='teamA')";
             //전체 상품 각각의 재고보다 주문량이 많은 주문들
             String subQuery2 = "select o from Order o" +
-                    "where o.orderAmount > ALL(select p.stockAmount from Product p";
+                    "where o.orderAmount > ALL(select p.stockAmount from Product p)";
             //어떤 티이든 팀에 소속된 회원
             String subQuery3 = "select m from Member m" +
-                    "where m.team = ANY(select t from Team t";
+                    "where m.team = ANY(select t from Team t)";
+            */
+
 
             tx.commit();
         } catch (Exception e) {
