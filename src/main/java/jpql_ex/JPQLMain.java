@@ -1,6 +1,7 @@
 package jpql_ex;
 
 import jpql_ex.domain.Member;
+import jpql_ex.domain.Team;
 import jpql_ex.dto.MemberDTO;
 
 import javax.persistence.EntityManager;
@@ -18,9 +19,16 @@ public class JPQLMain {
 
         try {
             for (int i = 1; i <= 10; i++) {
+                Team team = new Team();
+                team.setName("team" + i);
+                em.persist(team);
+
                 Member member = new Member();
                 member.setName("member" + i);
                 member.setAge(i*5);
+
+                member.setTeam(team);
+
                 em.persist(member);
             }
 
@@ -50,7 +58,6 @@ public class JPQLMain {
             MemberDTO memberDTO = resultList.get(0);
             System.out.println("username = " + memberDTO.getName());
             System.out.println("age = " + memberDTO.getAge());
-            */
 
             //페이징
             List<Member> result = em.createQuery("select m from Member m order by m.age desc ", Member.class)
@@ -62,6 +69,11 @@ public class JPQLMain {
             for (Member member1 : result) {
                 System.out.println("member1 = " + member1);
             }
+            */
+
+            String query = "select m from Member m left join m.team t on t.name='team3'";
+            List<Member> result = em.createQuery(query, Member.class).getResultList();
+            System.out.println("result size = " + result.size());
 
             tx.commit();
         } catch (Exception e) {
