@@ -1,14 +1,12 @@
 package jpql_ex;
 
-import jpashop.domain.member.Member;
+import jpql_ex.domain.Member;
+import jpql_ex.dto.MemberDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class JPQLMain {
@@ -19,17 +17,38 @@ public class JPQLMain {
         tx.begin();
 
         try {
-            List<Member> kimList = em.createQuery(
-                    "select m from Member m where m.name like '%kim%'"
-                    , Member.class
-            ).getResultList();
+            Member member = new Member();
+            member.setName("member1");
+            member.setAge(10);
+            em.persist(member);
 
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+            em.flush();
+            em.clear();
 
-            Root<Member> m = query.from(Member.class);
-            CriteriaQuery<Member> cq = query.select(m).where(cb.equal(m.get("name"), "kim"));
-            List<Member> kimListWithCriteriaQuery = em.createQuery(cq).getResultList();
+            /*
+            //Query 타입 조회
+            List resultList = em.createQuery("select m.name, m.age from Member m")
+                    .getResultList();
+            Object o = resultList.get(0);
+            Object[] result = (Object[]) o;
+            System.out.println("username = " + result[0]);
+            System.out.println("age = " + result[1]);
+
+            //Object[] 타입 조회
+            List<Object[]> resultList = em.createQuery("select m.name, m.age from Member m")
+							                .getResultList();
+            Object[] result = resultList.get(0);
+            System.out.println("username = " + result[0]);
+            System.out.println("age = " + result[1]);
+            */
+
+            //new DTO
+            List<MemberDTO> resultList = em.createQuery("select new jpql_ex.dto.MemberDTO(m.name, m.age) from Member m", MemberDTO.class)
+                    .getResultList();
+
+            MemberDTO memberDTO = resultList.get(0);
+            System.out.println("username = " + memberDTO.getName());
+            System.out.println("age = " + memberDTO.getAge());
 
             tx.commit();
         } catch (Exception e) {
