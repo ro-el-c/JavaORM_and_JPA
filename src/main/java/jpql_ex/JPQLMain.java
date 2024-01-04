@@ -134,8 +134,18 @@ public class JPQLMain {
             String query = "select t from Team t join fetch t.members";
             List<Team> result = em.createQuery(query, Team.class)
                     .getResultList();
-
             for (Team resultTeam : result) {
+                System.out.println("team " + resultTeam.getName() + ", members: " + resultTeam.getMembers().size());
+                for (Member member : resultTeam.getMembers()) {
+                    System.out.println("-> member = " + member);
+                }
+            }
+
+            //distinct fetch join
+            String distinctQuery = "select distinct t from Team t join fetch t.members";
+            List<Team> distinctResult = em.createQuery(distinctQuery, Team.class)
+                    .getResultList();
+            for (Team resultTeam : distinctResult) {
                 System.out.println("team " + resultTeam.getName() + ", members: " + resultTeam.getMembers().size());
                 for (Member member : resultTeam.getMembers()) {
                     System.out.println("-> member = " + member);
