@@ -119,7 +119,6 @@ public class JPQLMain {
             for (Member member : result) {
                 System.out.println("member = " + member.getName() + ", " + member.getTeam().getName());
             }
-            */
 
             //fetch join
             String query = "select m from Member m join fetch m.team";
@@ -128,6 +127,19 @@ public class JPQLMain {
 
             for (Member member : result) {
                 System.out.println("member = " + member.getName() + ", " + member.getTeam().getName());
+            }
+            */
+
+            //collection fetch join
+            String query = "select t from Team t join fetch t.members";
+            List<Team> result = em.createQuery(query, Team.class)
+                    .getResultList();
+
+            for (Team resultTeam : result) {
+                System.out.println("team " + resultTeam.getName() + ", members: " + resultTeam.getMembers().size());
+                for (Member member : resultTeam.getMembers()) {
+                    System.out.println("-> member = " + member);
+                }
             }
 
             tx.commit();
