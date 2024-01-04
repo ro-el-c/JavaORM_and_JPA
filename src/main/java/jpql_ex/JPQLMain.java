@@ -18,20 +18,28 @@ public class JPQLMain {
         tx.begin();
 
         try {
-            for (int i = 1; i <= 3; i++) {
-                Team team = new Team();
-                team.setName("team" + i);
-                em.persist(team);
+            Team team = new Team();
+            team.setName("team0");
+            em.persist(team);
+            Team team1 = new Team();
+            team1.setName("team1");
+            em.persist(team1);
 
+            for (int i = 1; i <= 4; i++) {
                 Member member = new Member();
                 if (i == 2) {
                     member.setName("관리자");
                 }
-                if (i > 2) {
+                if (i == 1 || i > 2) {
                     member.setName("member" + i);
                 }
                 member.setAge(i*3);
-                member.setTeam(team);
+
+                if (i % 2 == 0) {
+                    member.setTeam(team);
+                } else {
+                    member.setTeam(team1);
+                }
 
                 em.persist(member);
             }
@@ -102,7 +110,6 @@ public class JPQLMain {
                     .getResultList();
             System.out.println("nullifResult 이름이 관리자인 경우 = " + nullifResult.get(1));
             System.out.println("nullifResult 이름이 관리자가 아닌 경우 = " + nullifResult.get(2));
-            */
 
             //member 조회 후, team의 이름 참조시 지연 로딩
             String query = "select m from Member m";
@@ -112,7 +119,16 @@ public class JPQLMain {
             for (Member member : result) {
                 System.out.println("member = " + member.getName() + ", " + member.getTeam().getName());
             }
+            */
 
+            //fetch join
+            String query = "select m from Member m join fetch m.team";
+            List<Member> result = em.createQuery(query, Member.class)
+                    .getResultList();
+
+            for (Member member : result) {
+                System.out.println("member = " + member.getName() + ", " + member.getTeam().getName());
+            }
 
             tx.commit();
         } catch (Exception e) {
