@@ -18,7 +18,7 @@ public class JPQLMain {
         tx.begin();
 
         try {
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 3; i++) {
                 Team team = new Team();
                 team.setName("team" + i);
                 em.persist(team);
@@ -30,8 +30,7 @@ public class JPQLMain {
                 if (i > 2) {
                     member.setName("member" + i);
                 }
-                member.setAge(i*5);
-
+                member.setAge(i*3);
                 member.setTeam(team);
 
                 em.persist(member);
@@ -90,7 +89,6 @@ public class JPQLMain {
             //어떤 티이든 팀에 소속된 회원
             String subQuery3 = "select m from Member m" +
                     "where m.team = ANY(select t from Team t)";
-            */
 
             //조건식 - coalesce
             //ex. m.name이 null 이면 '이름 없는 회원' 반환, null이 아니면 m.name 반환
@@ -104,6 +102,17 @@ public class JPQLMain {
                     .getResultList();
             System.out.println("nullifResult 이름이 관리자인 경우 = " + nullifResult.get(1));
             System.out.println("nullifResult 이름이 관리자가 아닌 경우 = " + nullifResult.get(2));
+            */
+
+            //member 조회 후, team의 이름 참조시 지연 로딩
+            String query = "select m from Member m";
+            List<Member> result = em.createQuery(query, Member.class)
+                    .getResultList();
+
+            for (Member member : result) {
+                System.out.println("member = " + member.getName() + ", " + member.getTeam().getName());
+            }
+
 
             tx.commit();
         } catch (Exception e) {
